@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useRecoilState, useRecoilValue } from "recoil";
+
+import { fontSizeLabelState, fontSizeState } from "./simpleState";
+import SomeText from "./components/SomeText";
+import TextInput from "./components/TextInput";
 
 function App() {
+  const [fontSize, setFontSize] = useRecoilState(fontSizeState);
+  const fontSizeLabel = useRecoilValue(fontSizeLabelState);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>Current font size: {fontSizeLabel}</div>
+      <button
+        onClick={() => setFontSize((size) => size + 1)}
+        style={{ fontSize }}
+      >
+        Click to make me bigger!
+      </button>
+      <SomeText />
+      <TextInput />
     </div>
   );
 }
